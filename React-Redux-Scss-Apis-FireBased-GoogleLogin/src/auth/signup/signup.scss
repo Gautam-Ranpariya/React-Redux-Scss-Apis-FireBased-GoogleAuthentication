@@ -1,0 +1,200 @@
+@import '../../styles/global.scss';
+
+
+.mainSignUp {
+    height: 100vh;
+    background-color: var(--theme-bg-white);
+    position: relative;
+    overflow-y: hidden;
+
+    .vectorTop
+    {
+        position: absolute;
+        top: -60px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../../assets/images/auth-vector-top.png');
+        background-position: top left;
+        background-repeat: no-repeat;
+        display: none;
+
+        @include breakpoint ("max-md") {
+            display: block;
+        }
+    }
+
+    .vectorBottom
+    {
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../../assets/images/auth-vector-bottom.png');
+        background-position: bottom right;
+        background-repeat: no-repeat;
+        display: none;
+
+        @include breakpoint ("max-md") {
+            display: block;
+        }
+
+        @include breakpoint ("max-sm") {
+            bottom: -30px;
+        }
+    }
+
+    .container {
+        height: 100%;
+
+        .innerSignUp {
+            @include grid2-centers;
+            height: 100%;
+            position: relative;
+            z-index: 999;
+
+            @include breakpoint ("max-md") {
+                grid-template-columns: 1fr;
+            }
+
+            .imagePart {
+                @include flex-centers;
+                width: 100%;
+                height: 100vh;
+
+                @include breakpoint ("max-md") {
+                    padding: 0;
+                    height: 100%;
+                    align-items: end;
+                }
+
+                .auth {
+                        height: 100%;
+                        object-fit: cover;
+
+                        @include breakpoint ("max-md"){
+                            display: none;
+                        }
+                    }
+                .auth-signUp{
+                        max-height:150px;
+                        display: none;
+
+                        @include breakpoint ("max-md") {
+                            display: block;
+                        }
+                    }
+            }
+
+            .signUpPart {
+                @include flex-centers;
+                width: 100%;
+
+                .signUpForm {
+                    width: 100%;
+                    @include flex-col;
+                    max-width: 387px;
+                    height: auto;
+                    padding: 0 5px;
+                    gap: 15px;
+
+                    @include breakpoint ("max-md") {
+                        max-width: 80%;
+                        gap: 10px;
+                    }
+
+                    @include breakpoint ("max-xxs") {
+                        max-width: 85%;
+                        gap: 8px;
+                    }
+                    
+                    .signUpHeadingPart {
+                        padding: 2px 0;
+
+                        @include breakpoint ("max-md") {
+                            padding: 0;
+                        }
+
+                        .signUpHeading {
+                            @include font-karma-auth-heading-bold-700;
+                            color: var(--theme-auth-heading-text);
+                            text-align: left;
+                            width: 100%;
+                            padding: 5px 0;
+
+                            @include breakpoint ("max-md") {
+                                @include font-kaisei-harunoUmi-bold-700;
+                                font-size: 20px;
+                                line-height: 20px;
+                            }
+                        }
+                    }
+
+                    .signInWithPart {
+                        @include flex-centers;
+                        padding: 5px 0;
+
+                        .vector {
+                            height: 2px;
+                            width: 100%;
+                            background-color: var(--theme-auth-vector-bg-light-gray);
+                        }
+
+                        .otherOption {
+                            width: 100%;
+                            padding: 2px;
+
+                            .signUpOption {
+                                color: var(--theme-auth-other-options-text);
+                                text-align: center;
+                                @include font-roboto-400;
+
+                                @include breakpoint ("max-md") {
+                                    font-size: 12px;
+                                    @include font-kanit-auth-subHeading-bold-400;
+                                    line-height: 23.92px;
+                                }
+                            }
+                        }
+                    }
+                    .signUpSocialMediaPart
+                    {
+                        @include flex-centers;
+                        padding: 2px 0;
+                        width: 145px;
+                        margin: 0 auto;
+                        gap: 5px;
+                    }
+                    .accountOptionPart
+                    {
+                        .accountDescription
+                        {
+                            text-align: center;
+                            @include font-kanit-bold-400;
+                            color: var( --theme-auth-account-options-gray-text);
+
+                            @include breakpoint ("max-md") {
+                                color: var(--theme-auth-account-options-black-text);
+                            }
+
+                            .signUpLink
+                            {
+                                color: var( --theme-auth-account-options-link-moderate-text);
+
+                                @include breakpoint ("max-xs") {
+                                    color: var(--theme-auth-account-options-link-white-text);
+                                }
+
+                                // @media screen and (min-width :931px) {
+                                //     color: var( --theme-auth-account-options-link-moderate-text);
+                                // }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

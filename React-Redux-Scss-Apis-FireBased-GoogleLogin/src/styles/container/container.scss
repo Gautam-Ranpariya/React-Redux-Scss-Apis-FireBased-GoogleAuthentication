@@ -1,0 +1,19 @@
+@import '../breakPoint/breakPoint.scss';
+
+.container{
+    max-width: 1440px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    @include breakpoint("max-lg"){
+        max-width: 1040px;
+    }
+    @include breakpoint("max-md"){
+        max-width: 720px;
+    }
+    @include breakpoint("max-sm"){
+        max-width: 680px;
+    }
+    @include breakpoint("max-xs"){
+        max-width: 480px;
+    }
+}

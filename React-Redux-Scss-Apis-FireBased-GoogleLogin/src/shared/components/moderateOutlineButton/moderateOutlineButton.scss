@@ -1,0 +1,29 @@
+@import '../../../styles/global.scss';
+
+
+.moderateOutlineButtonMain
+{
+    width: 100%;
+    border-radius: 30px;
+    
+    .moderateOutlineBtn {
+        width: 100%;
+        background-color : var( --theme-bg-transparent);
+        border-radius: 30px;
+        outline: none;
+        border: 0.5px solid var(--theme-moderate-outline-button-border-moderate);
+        color: var(--theme-moderate-outline-button-text);
+        padding: 12px 15px;
+        text-align: center;
+        @include font-kanit-auth-subHeading-bold-400;
+        cursor: pointer;
+
+    @include breakpoint ("max-md") {
+        padding: 10px;
+        font-size: 18px; 
+        font-weight: 500;
+        line-height: 26.06px;
+    }
+
+    }
+}

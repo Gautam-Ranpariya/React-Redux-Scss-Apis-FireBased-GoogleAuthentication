@@ -1,0 +1,13 @@
+@import '../../../styles/global.scss';
+
+.otpContainer
+{
+    @include flex-centers;
+    justify-content: flex-start;
+    gap: 20px;
+
+    @include breakpoint ("max-xs")
+    {
+        gap: 10px;
+    }
+}

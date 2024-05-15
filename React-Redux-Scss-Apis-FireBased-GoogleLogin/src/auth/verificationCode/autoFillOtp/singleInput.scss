@@ -1,0 +1,45 @@
+    @import '../../../styles/global.scss';
+
+    .verificationButton {
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        background-color: var(--theme-auth-verification-button-bg-light-gray);
+        @include font-kanit-bold-400;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        display: inline-block;
+
+        /* Hide the default number input arrows */
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+        appearance: textfield;
+
+        &:focus
+        {
+            outline: none;
+        }
+
+        @include breakpoint ("max-xs") {
+            width: 50px;
+            height: 50px;
+        }
+
+        @include breakpoint ("max-xxs") {
+            width: 40px;
+            height: 40px;
+        }
+
+    }
+
+    .verificationButton::-webkit-inner-spin-button,
+    .verificationButton::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* For Firefox */
+    .verificationButton[type=number] {
+        -moz-appearance: textfield;
+    }

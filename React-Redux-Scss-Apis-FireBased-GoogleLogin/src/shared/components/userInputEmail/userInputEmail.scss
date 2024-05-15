@@ -1,0 +1,51 @@
+@import '../../../styles/global.scss';
+
+
+.loginEmailPart
+{
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 30px;
+    border: 0.5px solid var(--theme-auth-input-border-gray);
+    @include flex-row;
+    align-items: center;
+    gap: 20px;
+
+    @include breakpoint ("max-md") {
+        padding: 10px;
+    }
+    
+    .mailIcon
+    {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+    }
+
+    .userEmail
+    {
+        outline: none;
+        border: none;
+        @include font-kanit-bold-400;
+        width: 100%;
+        padding: 0 2px;
+        background-color: transparent;
+
+
+        &::placeholder
+        {
+            color: var(--theme-input-placeholder-gray-text);
+        }
+
+        @include breakpoint ("max-sm") {
+            font-size: 15px;
+            line-height: 18px;
+        }
+
+        @include breakpoint ("max-xs"){
+            font-size: 14px;
+            line-height: 23.92px;
+        }
+        
+    }
+}

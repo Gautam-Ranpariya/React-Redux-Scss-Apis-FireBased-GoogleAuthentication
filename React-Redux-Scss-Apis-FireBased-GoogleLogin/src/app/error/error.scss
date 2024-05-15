@@ -1,0 +1,129 @@
+@import '../../styles/global.scss' ;
+
+.mainError
+{
+    height: 100vh;
+    width: 100vw;
+    background-image: var(--theme-error-bg-gradient-light-blue);
+
+    .innerError
+    {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        align-items: center;
+        justify-content: center;
+
+        @include breakpoint ("max-md") {
+            grid-template-columns: repeat(2 ,1fr);
+        }
+
+        @include breakpoint ("max-sm")
+        {
+            grid-template-columns: 1fr;   
+            justify-content: flex-start;
+        }
+
+        @include breakpoint ("max-xxs")
+        {
+            padding: 5px;
+        }
+        
+
+        .errorContentPart
+        {
+            @include flex-col-centers;
+            gap: 10px;
+
+            @include breakpoint("max-sm")
+            {
+                order: 2;
+            }
+
+            .errorStutasText {
+                @include font-kaisei-harunoUmi-bold-700;
+                color: var( --theme-error-black-text);
+                font-size: 80px;
+                line-height: 80px;
+                letter-spacing: -2%;
+                text-align: center;
+
+                @include breakpoint("max-lg")
+                {
+                    font-size: 70px;
+                    line-height: 70px;
+                }
+
+                @include breakpoint("max-md")
+                {
+                    font-size: 60px;
+                    line-height: 60px;
+                }
+
+                @include breakpoint("max-xs")
+                {
+                    font-size: 40px;
+                    line-height: 40px;
+                
+                }
+            }
+
+            .errorStutasCode
+            {
+                color: var(--theme-error-red-text);
+                @include font-kaisei-harunoUmi-bold-700;
+                font-size: 80px;
+                line-height: 80px;
+                letter-spacing: -2%;
+                text-align: center;
+
+                @include breakpoint("max-lg")
+                {
+                    font-size: 70px;
+                    line-height: 70px;
+                }
+
+                @include breakpoint("max-md")
+                {
+                    font-size: 60px;
+                    line-height: 60px;
+                }
+
+                @include breakpoint("max-xs")
+                {
+                    font-size: 40px;
+                    line-height: 40px;
+                
+                }
+            }
+        }
+
+        .errorImagePart
+        {
+            @include flex-centers;
+
+            .pageNotFound
+            {
+                max-height: 500px;
+                object-fit: cover;
+
+                @include breakpoint("max-md")
+                {
+                    max-height: 400px;
+                }
+
+                @include breakpoint("max-sm")
+                {
+                    max-height: 300px;
+                }
+
+                @include breakpoint("max-xs")
+                {
+                    max-height: 250px;
+                }
+            }
+        }
+    }
+}

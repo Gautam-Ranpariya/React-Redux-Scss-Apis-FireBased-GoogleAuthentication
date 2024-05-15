@@ -1,0 +1,33 @@
+@import '../../../styles/global.scss';
+
+
+
+.socialMediaButtons
+{
+    width: 100%;
+
+    .socialMediaBtn
+    {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background-color: var(--theme-auth-button-bg-moderate);
+        border: none;
+        outline: none;
+        @include flex-centers;
+        cursor: pointer;
+
+        
+        .icons
+        {
+            width: 18px;
+            color: var(--theme-auth-social-button-text);
+            height: 18px;
+
+            @include breakpoint("max-md") {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+}

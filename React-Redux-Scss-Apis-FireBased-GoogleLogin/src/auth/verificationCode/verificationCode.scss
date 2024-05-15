@@ -1,0 +1,162 @@
+@import '../../styles/global.scss';
+
+
+.mainVerificationCode {
+    height: 100vh;
+    background-color: var(--theme-bg-white);
+    position: relative;
+    overflow-y: hidden;
+
+    .vectorTop
+    {
+        position: absolute;
+        top: -60px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../../assets/images/auth-vector-top.png');
+        background-position: top left;
+        background-repeat: no-repeat;
+        display: none;
+
+        @include breakpoint ("max-md") {
+            display: block;
+        }
+    }
+
+    .vectorBottom
+    {
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../../assets/images/auth-vector-bottom.png');
+        background-position: bottom right;
+        background-repeat: no-repeat;
+        display: none;
+
+        @include breakpoint ("max-md") {
+            display: block;
+        }
+
+        @include breakpoint ("max-sm") {
+            bottom: -30px;
+        }
+    }
+
+    .container {
+        height: 100%;
+        position: relative;
+        z-index: 99;
+        overflow-y: hidden;
+
+        .innerVerificationCode {
+            @include grid2-centers;
+            height: 100%;
+
+            @include breakpoint ("max-md") {
+                grid-template-columns: 1fr;
+            }
+
+            .imagePart {
+                @include flex-centers;
+                width: 100%;
+                height: 100vh;
+
+                @include breakpoint ("max-md") {
+                    padding: 0;
+                    height: 100%;
+                    align-items: end;
+                }
+
+                .auth {
+                        height: 100%;
+                        object-fit: cover;
+
+                        @include breakpoint ("max-md"){
+                            display: none;
+                        }
+                    }
+                    .auth-verificationCode
+                    {
+                        max-height:150px;
+                        display: none;
+
+                        @include breakpoint ("max-md") {
+                            display: block;
+                        }
+                    }
+            }
+
+            .verificationCodePart {
+                @include flex-centers;
+                width: 100%;
+
+                .verificationForm {
+                    width: 100%;
+                    @include flex-col;
+                    max-width: 387px;
+                    height: auto;
+                    padding: 0 5px;
+                    gap: 15px;
+
+                    @include breakpoint ("max-md") {
+                        max-width: 55%;
+                        gap: 10px;
+                    }
+
+                    @include breakpoint ("max-xs") {
+                        max-width: 70%;
+                    }
+                    
+                    .verificationCodeHeadingPart {
+                        padding: 2px 0;
+
+                        @include breakpoint ("max-md") {
+                            padding: 0;
+                        }
+
+                        .verificationCodeHeading {
+                            @include font-karma-auth-heading-bold-700;
+                            color: var(--theme-auth-heading-text);
+                            text-align: left;
+                            width: 100%;
+                            padding: 10px 0;
+
+                            @include breakpoint ("max-md") {
+                                @include font-kaisei-harunoUmi-bold-700;
+                                font-size: 20px;
+                                line-height: 20px;
+                            }
+                        }
+                        .verificationCodeHeadingDescription
+                        {
+                            @include font-karma-auth-subHeading-bold-400;
+                            color: var( --theme-auth-subHeading-text);
+                        }
+                    }
+
+                    .verificationCodeBorderVector
+                    {
+                        height: 0.52px;
+                        max-width: 100px;
+                        background-color: var(--theme-auth-border-vector-bg-gray);
+                    }
+
+                    .signInWithPart {
+                        @include flex-centers;
+                        padding: 5px 0;
+
+                        .vector {
+                            height: 2px;
+                            width: 100%;
+                            background-color: var(--theme-auth-vector-bg-light-gray);
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

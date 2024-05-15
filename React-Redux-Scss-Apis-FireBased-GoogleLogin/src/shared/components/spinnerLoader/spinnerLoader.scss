@@ -1,0 +1,58 @@
+/* HTML: <div class="loader"></div> */
+
+@import '../../../styles/global.scss';
+
+.spinnerLoaderPart {
+
+  .spinnerloader {
+    --d: 90px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: #fff;
+    box-shadow:
+      calc(1*var(--d)) calc(0*var(--d)) 0 0,
+      calc(0.707*var(--d)) calc(0.707*var(--d)) 0 1px,
+      calc(0*var(--d)) calc(1*var(--d)) 0 2px,
+      calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+      calc(-1*var(--d)) calc(0*var(--d)) 0 4px,
+      calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+      calc(0*var(--d)) calc(-1*var(--d)) 0 6px;
+    animation: l27 1s infinite steps(8);
+
+    @include breakpoint("max-lg")
+    {
+      --d : 70px;
+      width: 20px;
+      height: 20px;
+    }
+
+    @include breakpoint("max-md")
+    {
+      --d : 60px;
+      width: 15px;
+      height: 15px;
+    }
+
+    @include breakpoint("max-sm")
+    {
+      --d : 50px;
+      width: 12px;
+      height: 12px;
+    }
+
+    @include breakpoint("max-xs")
+    {
+      --d : 40px;
+      width: 10px;
+      height: 10px;
+    }
+
+    @keyframes l27 {
+      100% {
+        transform: rotate(1turn)
+      }
+    }
+  }
+
+}

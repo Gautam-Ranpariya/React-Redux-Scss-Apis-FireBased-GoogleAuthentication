@@ -1,0 +1,30 @@
+@import '../../../styles/global.scss';
+
+
+.moderateButtonMain
+{
+    width: 100%;
+    border-radius: 30px;
+    
+    .moderateBtn {
+        width: 100%;
+        background-color: var(--theme-auth-button-bg-moderate);
+        border-radius: 30px;
+        outline: none;
+        border: none;
+        color: var(--theme-auth-moderate-button-text);
+        padding: 12px 15px;
+        text-align: center;
+        @include font-kaisei-harunoUmi-bold-700;
+        cursor: pointer;
+        font-size: 18px; 
+
+        
+    @include breakpoint ("max-md") {
+        padding: 10px;
+        font-weight: 500;
+        line-height: 26.06px;
+    }
+
+    }
+}

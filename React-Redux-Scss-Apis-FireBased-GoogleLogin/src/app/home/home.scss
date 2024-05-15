@@ -1,0 +1,373 @@
+@import "../../styles/global.scss";
+
+.mainHome {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  background-color: var( --theme-bg-white);
+
+  .homeTopVector {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 500px;
+    display: block;
+
+    @include breakpoint ("max-lg") {
+      max-width: 450px;
+    }
+
+    @include breakpoint ("max-md") {
+      display: none;
+    }
+    .topVectorImageHome {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .homeBottomVector {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    max-width: 500px;
+    display: block;
+
+    @include breakpoint ("max-lg") {
+        max-width: 400px;
+    }
+
+    @include breakpoint ("max-md") {
+        display: none;
+      }
+
+    .bottomVectorImageHome {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .homeMobileTopVector
+  {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    background-color: var(--theme-bg-moderate);
+    height: 180px;
+    width: 180px;
+    filter: blur(50px);
+    border-radius: 50%;
+    display: none;
+
+    @include breakpoint ("max-md") {
+        display: block;
+    }
+  }
+
+  .homeMobilebottomVector
+  {
+    position: absolute;
+    bottom: -60px;
+    left: -60px;
+    background-color: var(--theme-bg-moderate);
+    height: 243px;
+    width: 237px;
+    filter: blur(80px);
+    border-radius: 50%;
+    display: none;
+
+    @include breakpoint ("max-md") {
+        display: block;
+    }
+  
+
+  }
+
+  .innerHome {
+    position: relative;
+    z-index: 99;
+    background-color: var(--theme-bg-transparent);
+    height: 100%;
+
+
+    .homeHeader {
+      overflow-y: hidden;
+      padding: 10px;
+      box-shadow: 0px 4px 4px 0px #00000040;
+      height: 70px;
+      display: block;
+
+      @include breakpoint ("max-md") {
+        display: none;
+      }
+
+      .container {
+        @include grid2-centers;
+        gap: 5px;
+        padding: 0 80px;
+
+        @include breakpoint ("max-lg") {
+          padding: 0 20px;
+        }
+
+        @include breakpoint ("max-md") {
+            padding: 0;
+            max-width: 800px;
+          }
+
+        .logo {
+          @include flex-centers;
+          justify-content: start;
+
+          .logoImage {
+            max-width: 50px;
+          }
+        }
+        .headerItems {
+          @include flex-centers;
+          justify-content: end;
+          gap: 30px;
+
+          .moderateButtonMain {
+            max-width: 120px;
+
+            .moderateBtn {
+              @include font-kanit-bold-400;
+              line-height: 16px;
+            }
+          }
+
+          .moderateOutlineButtonMain {
+            max-width: 120px;
+
+            .moderateOutlineBtn {
+              @include font-kanit-bold-400;
+              line-height: 16px;
+            }
+          }
+        }
+      }
+    }
+
+    .homeMainContent {
+      height: calc(100% - 70px);
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      justify-content: center;
+
+      @include breakpoint ("max-md") {
+        height: 100%;
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+        // align-items: flex-start;
+      }
+
+      .homeContentPart {
+        @include flex-col;
+        height: 100%;
+        align-items: flex-start;
+        height: 100%;
+        padding-top: 70px;
+        display: block;
+
+        @include breakpoint ("max-md") {
+            display: none;
+        }
+
+        .innerContentPart {
+          max-width: 70%;
+          @include flex-row;
+          flex-direction: column;
+          margin: 0 auto;
+
+          .mainHomeHeading {
+            @include font-kaisei-harunoUmi-bold-700;
+            font-size: 70px;
+            line-height: 80px;
+            letter-spacing: 2px;
+            color: var(--theme-home-heading-gray-text);
+            padding: 20px 0;
+
+            @include breakpoint("max-lg")
+            {
+                font-size: 50px;
+                line-height: 60px;
+                max-width: 200px;
+            }
+
+            @include breakpoint("max-md")
+            {
+                font-size: 40px;
+                line-height: 40px;
+                max-width: 150px;
+            }
+          }
+
+          .homeHeadingDescription {
+            @include font-roboto-400;
+            font-size: 14px;
+            line-height: 23.94px;
+            color: var(--theme-auth-options-gray-text);
+          }
+
+          .moderateButtonMain {
+            max-width: 217px;
+            margin: 10px 0;
+            line-height: 30px;
+          }
+        }
+      }
+
+      .homeImagePart {
+        @include flex-centers;
+        flex-direction: column;
+        position: relative;
+        height: 100%;
+
+        @include breakpoint ("max-md") {
+            display: none;
+        }
+
+        .homeBannerImage {
+          margin: 0 auto;
+          position: absolute;
+          top: 5%;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background-image: url("../../assets/images/homeCenterVector.png");
+          background-position: center center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          object-fit: contain;
+          overflow: visible;
+        }
+        .homeShoppingGirl {
+          max-width: 350px;
+          max-height: 350px;
+          position: relative;
+          z-index: 99;
+
+        }
+      }
+
+      .homeMobileContentPart
+      {
+        display: none;
+        width: 100%;
+        padding: 10px 50px;
+        
+        @include breakpoint ("max-md") {
+          display: block;
+        }
+        
+        @include breakpoint ("max-xs") {
+          padding: 10px;
+        }
+
+        @include breakpoint ("max-xxs") {
+          max-width: 230px;
+        }
+
+        .homeMobileHeading
+        {
+            @include font-kaisei-harunoUmi-bold-700;
+            font-size: 35px;
+            line-height: 35px;
+            letter-spacing: -2%;
+            padding: 10px 0;
+        }
+
+        .homeMobileHeadingDescription
+        {
+            @include font-roboto-400 ;
+            font-size: 16px;
+            line-height: 23.36px;
+            letter-spacing: -2%;
+            color: var( --theme-auth-options-gray-text);
+        }
+      }
+
+      .homeMobileImagePart
+      {
+        position: relative;
+        display: none;
+        
+        @include breakpoint ("max-md") {
+          @include flex-centers;
+        }
+
+        .homeMobileBannerImage
+        {
+          background-color: var(--theme-home-bg-yellow);
+          width: 60%;
+          margin: 0 auto;
+          height: 300px;
+          border-radius: 50%;
+          filter: blur(70px);
+      
+        }
+
+        .homeMobileShoppingGirl
+        {
+          max-width: 240px;
+          max-height: 270px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+      }
+
+      .homeMobileAuthButtons
+      {
+        gap: 10px;
+        padding: 5px 50px;
+        position: relative;
+        z-index: 999;
+        display: none;
+        
+        @include breakpoint("max-md"){
+          @include flex-col-centers;
+        }
+
+        @include breakpoint ("max-xs") {
+          padding: 0 10px;
+        }
+
+        .moderateButtonMain
+        {
+          .moderateBtn
+          {
+            padding: 8px 10px;
+            font-size: 18px;
+
+            @include breakpoint("max-sm")
+            {
+              padding: 8px;
+            }
+          }
+        }
+
+        .moderateOutlineButtonMain
+        { 
+          .moderateOutlineBtn
+          {
+            color: var( --theme-auth-account-options-black-text);
+            padding: 8px 10px;
+            font-size: 18px;
+
+            @include breakpoint("max-sm")
+            {
+              padding: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
