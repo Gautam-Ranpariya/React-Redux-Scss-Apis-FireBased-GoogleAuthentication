@@ -12,6 +12,8 @@ import authLogin from '../../assets/images/auth-login.png';
 import ValidateUserLogin from '../../validation/loginValidation';
 import SetCookie from '../../helpers/cookies/setCookie';
 import RemoveCookie from '../../helpers/cookies/removeCookie';
+import { FacebookAuthProvider, getAuth , GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { app } from '../../../firebaseConfig';
 
 const UserInputEmail = lazy(() => import('../../shared/components/userInputEmail'));
 const UserInputPassword = lazy(() => import('../../shared/components/userInputPassword'));
@@ -29,29 +31,52 @@ export default function Login() {
 
 
   // google login :)
-  // const login = useGoogleLogin({
-  //   onSuccess: codeResponse => console.log(codeResponse),
-  //   flow: 'auth-code',
-  // });
+  const handleGoogleLogin = async () => {
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider).then((res) => {
+        const name = res.user.name;
+        const email = res.user.email;
+        const photo = res.user.photoURL;
 
-  // const googleLogin = useGoogleLogin({
-  //   flow: 'implicit',
-  //   onSuccess: async (tokenResponse) => {
-  //     try {
-  //       console.log(tokenResponse)
-  //     } catch (err) {
-  //       console.log(err)
-  //     }
-  //   },
-  //   onError: (errorResponse) => console.log(errorResponse)
-  // })
+        console.log('Google login successful', res);
+        console.log('Google name', name);
+        console.log('Google email', email);
+        console.log('Google photo', photo);
+      })
+    } catch (error) {
+      console.log('Google login failed', error);
+    }
+  }
+
+
+  // facebook login :)
+  const handleFacebbokLogin = async () => {
+    const auth = getAuth(app);
+    const provider = new FacebookAuthProvider();
+    try {
+      await signInWithPopup(auth, provider).then((res) => {
+        const name = res.user.name;
+        const email = res.user.email;
+        const photo = res.user.photoURL;
+
+        console.log('Google login successful', res);
+        console.log('Google name', name);
+        console.log('Google email', email);
+        console.log('Google photo', photo);
+      })
+    } catch (error) {
+      console.log('Google login failed', error);
+    }
+  }
 
 
   // submit login form :)
   const handleClick = async (e) => {
     if (ValidateUserLogin(user)) {
       await dispatch(loginUser(user))
-        .then((res) => {          
+        .then((res) => {
           if (res?.payload?.token) {
             RemoveCookie('accessToken');
             SetCookie('accessToken', JSON.stringify(res?.payload?.token));
@@ -65,8 +90,7 @@ export default function Login() {
           else if (res?.payload?.response?.data?.msg === 'you dont have a account plz sing up') {
             toast.error("you dont have a account plz sing up");
           }
-          else
-          {
+          else {
             console.log('error: ', res.payload);
             navigate('/signup');
           }
@@ -121,8 +145,8 @@ export default function Login() {
                     <div className='vector'></div>
                   </div>
                   <div className='loginSocialMediaPart'>
-                    <SocialMediaButton img={facebookIcon} alt="facebook Icon" />
-                    <SocialMediaButton img={googleIcon} alt="google Icon" onClick={() => googleLogin()}  />
+                    <SocialMediaButton img={facebookIcon} alt="facebook Icon" onClick={handleFacebbokLogin} />
+                    <SocialMediaButton img={googleIcon} alt="google Icon" onClick={handleGoogleLogin} />
                     <SocialMediaButton img={linkedInIcon} alt="linkedIn Icon" />
                   </div>
                   <div className="signupOptionPart">
