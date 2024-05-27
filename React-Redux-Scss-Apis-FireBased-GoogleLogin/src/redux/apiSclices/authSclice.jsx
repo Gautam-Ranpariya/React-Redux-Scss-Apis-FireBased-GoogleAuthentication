@@ -196,7 +196,6 @@ export const authSclice = createSlice({
             .addCase(alreadyUser.rejected, (state, action) => {
                 state.loading = "failed";
                 state.error = action.error;
-                console.log("🚀 ~ .addCase ~ action.error:", action.error)
             })
 
 
