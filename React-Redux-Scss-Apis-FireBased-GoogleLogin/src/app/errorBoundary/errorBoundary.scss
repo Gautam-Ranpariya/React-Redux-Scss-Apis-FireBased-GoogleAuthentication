@@ -1,0 +1,76 @@
+@import '../../styles/global.scss';
+
+.error-boundary {
+    height: auto;
+    width: 100%;
+    padding: 10px;
+    
+    
+    .innerError {
+        text-align: center;
+        color: #721c24;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f8d7da;
+        max-width: 95%;
+        border: 1px solid #f5c2c7;
+        margin: 0 auto;
+        padding: 20px 10px;
+        overflow: hidden;
+
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .subHeading
+        {
+            color: rebeccapurple;
+            font-weight: bold;
+            margin:10px 0;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-align: center;
+            text-wrap: wrap;
+
+            .subHeadingErr {
+                font-size: 22px;
+                color: #495057;
+            }
+
+            em {
+                color: #495057;
+                font-style: italic;
+                font-weight: bold;
+            }
+        }
+
+        .errText
+        {
+            font-size: 1.2em;
+            margin: 10px 0;
+            text-align: left;
+            text-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #0056b3;
+            }
+        }
+    }
+
+}

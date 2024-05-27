@@ -1,13 +1,10 @@
 import './signup.scss';
-import React, { lazy, useEffect, useState } from 'react';
+import React, { lazy, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import AuthDesktop from '../../assets/images/authDesktop.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { alreadyUser, sendOtpMail, setNewUserData, resetUserData } from '../../redux/apiSclices/authSclice';
-import facebookIcon from '../../assets/icons/facebook.svg';
-import googleIcon from '../../assets/icons/google.svg';
-import linkedInIcon from '../../assets/icons/linkedIn.svg';
+import { alreadyUser, sendOtpMail, setNewUserData } from '../../redux/apiSclices/authSclice';
 import authSignUp from '../../assets/images/auth-signUp.png';
 import ValidateUserRegistration from '../../validation/signUp-forgotPasswordValidation';
 
@@ -15,7 +12,6 @@ const UserInputConformPassword = lazy(() => import('../../shared/components/user
 const UserInputEmail = lazy(() => import('../../shared/components/userInputEmail'));
 const UserInputPassword = lazy(() => import('../../shared/components/userInputPassword'));
 const ModerateButton = lazy(() => import('../../shared/components/moderateButton'));
-const SocialMediaButton = lazy(() => import('../../shared/components/socialMediaButton'));
 
 
 export default function SignUp() {
@@ -49,10 +45,10 @@ export default function SignUp() {
   // submit user data :)
   const handleClick = async () => {
     if (ValidateUserRegistration(user)) {
-      dispatch(alreadyUser(user.email)).then((res) => {
-        if (res.payload.alreadyUser === false) {
-          dispatch(sendOtpMail(user.email)).then((res) => {
-            if (res.payload.mailSend) {
+      dispatch(alreadyUser(user?.email)).then((res) => {
+        if (res?.payload?.alreadyUser === false) {
+          dispatch(sendOtpMail(user?.email)).then((res) => {
+            if (res?.payload?.mailSend) {
               navigate('/verificationCode');
             }
             else { console.log('mail not send'); }
@@ -100,18 +96,6 @@ export default function SignUp() {
                   <UserInputPassword name="password" placeholder="Enter Your Password" onChange={(e) => handleChange(e)} value={user.password} />
                   <UserInputConformPassword name="conformPassword" placeholder="Confiram Password" onChange={(e) => handleChange(e)} value={user.conformPassword} onKeyDown={(e) => handleKeyDown(e)} />
                   <ModerateButton text="Sign Up" onClick={(e) => handleClick(e)} disabled={loading === 'pending' ? true : false} />
-                  <div className="signInWithPart">
-                    <div className='vector'></div>
-                    <div className='otherOption'>
-                      <p className='signUpOption'>Or Sign Up With</p>
-                    </div>
-                    <div className='vector'></div>
-                  </div>
-                  <div className='signUpSocialMediaPart'>
-                    <SocialMediaButton img={facebookIcon} alt="facebook Icon" />
-                    <SocialMediaButton img={googleIcon} alt="google Icon" />
-                    <SocialMediaButton img={linkedInIcon} alt="linkedIn Icon" />
-                  </div>
                   <div className="accountOptionPart">
                     <p className='accountDescription'>Alreay have an accout? <Link to={'/login'} className='signUpLink'>Sing In</Link></p>
                   </div>

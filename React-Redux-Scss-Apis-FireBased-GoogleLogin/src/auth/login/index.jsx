@@ -2,17 +2,17 @@ import React, { lazy } from 'react'
 import './login.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, loginUserData, resetUserData } from '../../redux/apiSclices/authSclice';
+import { loginUser, loginUserData, setAuthenticateUser, setGoogleAuthData } from '../../redux/apiSclices/authSclice';
 import { toast } from 'react-toastify';
 import AuthDesktop from '../../assets/images/authDesktop.png';
 import facebookIcon from '../../assets/icons/facebook.svg';
 import googleIcon from '../../assets/icons/google.svg';
-import linkedInIcon from '../../assets/icons/linkedIn.svg';
+import githubIcon from '../../assets/icons/github.svg';
 import authLogin from '../../assets/images/auth-login.png';
 import ValidateUserLogin from '../../validation/loginValidation';
 import SetCookie from '../../helpers/cookies/setCookie';
 import RemoveCookie from '../../helpers/cookies/removeCookie';
-import { FacebookAuthProvider, getAuth , GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { app } from '../../../firebaseConfig';
 
 const UserInputEmail = lazy(() => import('../../shared/components/userInputEmail'));
@@ -36,17 +36,19 @@ export default function Login() {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider).then((res) => {
-        const name = res.user.name;
-        const email = res.user.email;
-        const photo = res.user.photoURL;
-
-        console.log('Google login successful', res);
-        console.log('Google name', name);
-        console.log('Google email', email);
-        console.log('Google photo', photo);
+        const displayName = res?.user?.displayName;
+        const email = res?.user?.email;
+        const photo = res?.user?.photoURL;
+        const token = res?.user?.accessToken;
+        RemoveCookie('accessToken');
+        SetCookie('accessToken', token);
+        dispatch(setGoogleAuthData({ displayName, email, photo }));
+        dispatch(setAuthenticateUser(token ? true : false));
+        navigate('/profile');
       })
     } catch (error) {
       console.log('Google login failed', error);
+      toast.error(error.message);
     }
   }
 
@@ -57,19 +59,47 @@ export default function Login() {
     const provider = new FacebookAuthProvider();
     try {
       await signInWithPopup(auth, provider).then((res) => {
-        const name = res.user.name;
-        const email = res.user.email;
-        const photo = res.user.photoURL;
-
-        console.log('Google login successful', res);
-        console.log('Google name', name);
-        console.log('Google email', email);
-        console.log('Google photo', photo);
+        const displayName = res?.user?.displayName;
+        const email = res?.user?.email;
+        const photo = res?.user?.photoURL;
+        const token = res?.user?.accessToken;
+        RemoveCookie('accessToken');
+        SetCookie('accessToken', token);
+        dispatch(setGoogleAuthData({ displayName, email, photo }));
+        dispatch(setAuthenticateUser(token ? true : false));
+        navigate('/profile');
+        toast.success(`Welcome ${displayName}, Your Successfully logged in. !!`);
       })
     } catch (error) {
-      console.log('Google login failed', error);
+      console.log('Facebook login failed', error);
+      toast.error(error.message);
     }
   }
+
+
+  // github login :)
+  const handleGitHubLogin = async () => {
+    const auth = getAuth(app);
+    const provider = new GithubAuthProvider();
+    try {
+      await signInWithPopup(auth, provider).then((res) => {
+        const displayName = res?.user?.displayName;
+        const email = res?.user?.email;
+        const photo = res?.user?.photoURL;
+        const token = res?.user?.accessToken;
+        RemoveCookie('accessToken');
+        SetCookie('accessToken', token);
+        dispatch(setGoogleAuthData({ displayName, email, photo }));
+        dispatch(setAuthenticateUser(token ? true : false));
+        navigate('/profile');
+        toast.success(`Welcome ${displayName}, Your Successfully logged in. !!`);
+      })
+    } catch (error) {
+      console.log('GitHub login failed', error);
+      toast.error(error.message);
+    }
+  }
+
 
 
   // submit login form :)
@@ -77,12 +107,14 @@ export default function Login() {
     if (ValidateUserLogin(user)) {
       await dispatch(loginUser(user))
         .then((res) => {
-          if (res?.payload?.token) {
+        const token = res?.payload?.token;
+        const email =  user?.email;
+          if (token) {
             RemoveCookie('accessToken');
-            SetCookie('accessToken', JSON.stringify(res?.payload?.token));
-            dispatch(resetUserData());
-            navigate('/');
-            toast.success(`Welcome ${user.email}, Your Successfully logged in. !!`);
+            SetCookie('accessToken', token);
+            dispatch(setAuthenticateUser(token ? true : false));
+            navigate('/profile');
+            toast.success(`Welcome ${email}, Your Successfully logged in. !!`);
           }
           else if (res?.payload?.response?.data?.msg === 'wrong password') {
             toast.error("Please Enter Valid Password");
@@ -91,15 +123,11 @@ export default function Login() {
             toast.error("you dont have a account plz sing up");
           }
           else {
-            console.log('error: ', res.payload);
+            console.log('error: ', res?.payload);
             navigate('/signup');
           }
         })
         .catch((err) => {
-          if (err) {
-            navigate('/signup');
-            toast.error('please sign up first');
-          }
           console.log("error :-- login catch --", err);
         });
     }
@@ -145,9 +173,9 @@ export default function Login() {
                     <div className='vector'></div>
                   </div>
                   <div className='loginSocialMediaPart'>
-                    <SocialMediaButton img={facebookIcon} alt="facebook Icon" onClick={handleFacebbokLogin} />
-                    <SocialMediaButton img={googleIcon} alt="google Icon" onClick={handleGoogleLogin} />
-                    <SocialMediaButton img={linkedInIcon} alt="linkedIn Icon" />
+                    <SocialMediaButton img={facebookIcon} alt="facebook Icon" onClick={handleFacebbokLogin} className="icons" />
+                    <SocialMediaButton img={googleIcon} alt="google Icon" onClick={handleGoogleLogin} className="icons" />
+                    <SocialMediaButton img={githubIcon} alt="github Icon" onClick={handleGitHubLogin} className="github icons" />
                   </div>
                   <div className="signupOptionPart">
                     <p className='signupDescription'>Don`t have an account? <Link to={'/signup'} className='signupLink'>Sing up</Link></p>

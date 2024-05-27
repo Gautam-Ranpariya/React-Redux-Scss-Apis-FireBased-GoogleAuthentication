@@ -1,3 +1,6 @@
+
+// helper functions of header for request to server :) 
+
 export const authHeader = () => {
     let sessionObj = getSession();
     if (sessionObj && sessionObj.access_token) {

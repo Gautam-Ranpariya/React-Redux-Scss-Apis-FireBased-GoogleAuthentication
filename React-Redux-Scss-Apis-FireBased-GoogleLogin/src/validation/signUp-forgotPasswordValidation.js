@@ -1,5 +1,7 @@
 import { toast } from "react-toastify";
 
+
+// check validation user data for signup  and forgot password :)
 export default function ValidateUserRegistration(data) {
       let isValid = false;
       const email_pattern = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;

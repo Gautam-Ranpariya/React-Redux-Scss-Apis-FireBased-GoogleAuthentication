@@ -2,14 +2,13 @@ import React, { lazy } from 'react'
 import './forgotPassword.scss';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { sendOtpMail, setForgotPasswordEmailData } from '../../redux/apiSclices/authSclice';
+import { sendOtpMail, setForgotPasswordEmailData, setIsForgotEmail } from '../../redux/apiSclices/authSclice';
 import { useDispatch, useSelector } from 'react-redux';
 import facebookIcon from '../../assets/icons/facebook.svg';
 import googleIcon from '../../assets/icons/google.svg';
 import linkedInIcon from '../../assets/icons/linkedIn.svg';
 import AuthDesktop from '../../assets/images/authDesktop.png';
 import authForgotPassword from '../../assets/images/auth-forgotPassword.png';
-
 
 const UserInputEmail = lazy(() => import('../../shared/components/userInputEmail'));
 const ModerateButton = lazy(() => import('../../shared/components/moderateButton'));
@@ -32,7 +31,7 @@ export default function ForgotPassword() {
 
   const handleClick = async () => {
     const email_pattern = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-    if ((forgotEmail === '') || (forgotEmail.length === 0)) {
+    if ((forgotEmail === '') || (forgotEmail?.length === 0)) {
       toast.error('Please Enter Your Email');
     }
     else if (!email_pattern.test(forgotEmail)) {
@@ -40,8 +39,8 @@ export default function ForgotPassword() {
     }
     else {
       await dispatch(sendOtpMail(forgotEmail)).then((res) => {
-        console.log('sendOtpMail',res.payload);
-        // localStorage.setItem('forgotPassEmail', JSON.stringify(forgotEmail));
+        console.log('sendOtpMail',res?.payload);
+        dispatch(setIsForgotEmail(true));
         navigate('/verificationCode');
       });
     }
@@ -67,18 +66,6 @@ export default function ForgotPassword() {
                   </div>
                   <UserInputEmail name="email" placeholder="Enter your Email" onChange={(e) => handleChange(e)} value={forgotEmail} />
                   <ModerateButton text="Send" onClick={(e) => handleClick(e)} disabled={loading === 'pending' ? true : false} />
-                  <div className="signInWithPart">
-                    <div className='vector'></div>
-                    <div className='otherOption'>
-                      <p className='signInOption'>Or Sign In With</p>
-                    </div>
-                    <div className='vector'></div>
-                  </div>
-                  <div className='forgotPasswordSocialMediaPart'>
-                    <SocialMediaButton img={facebookIcon} alt="facebook Icon" />
-                    <SocialMediaButton img={googleIcon} alt="google Icon" />
-                    <SocialMediaButton img={linkedInIcon} alt="linkedIn Icon" />
-                  </div>
                 </div>
               </div>
             </div>

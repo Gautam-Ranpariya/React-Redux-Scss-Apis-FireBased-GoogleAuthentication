@@ -9,6 +9,8 @@ const auth = {
         email: "",
         password: "",
         conformPassword: "",
+        name: "",
+        profileUrl: "",
     },  // userData states :)   
 
     loading: "init",    // api calling states :)
@@ -16,6 +18,8 @@ const auth = {
     userOtp: "init",    // verify user :)
 
     forgotEmail : "",   // forgorPassword :)
+    
+    isForgotEmail : false,  // is forgot email :)
 
     forgotPasswordUser : {
         resetPassword : "", 
@@ -23,6 +27,9 @@ const auth = {
     },   // reset password :)
 
     error : null, // error message :)
+
+    isAuthenticate : false, // isSuccessFullyLogin :)
+    
 }
 
 
@@ -107,7 +114,7 @@ export const verifyForgotPasswordData = createAsyncThunk(
     'auth/verifyForgotPasswordData',
     async initialUserData => {
         const body = {
-            email: initialUserData.forgotPassEmail,
+            email: initialUserData.forgotEmail,
             otp: Number(initialUserData.userOtp),
         }
         try {
@@ -176,11 +183,28 @@ export const authSclice = createSlice({
             state.forgotEmail = action.payload;
         },
 
+         // isForgotEmail or not  :)
+         setIsForgotEmail(state, action){
+            state.isForgotEmail = action.payload;
+         },
+
          // forgotPassword resetPassword data :)
          setForgotPasswordData(state, action){
             const {name , value} = action.payload;
             state.forgotPasswordUser[name] = value;
-            // state.resetPassword = action.payload;
+        },
+
+        // setGogleAuth data :)
+        setGoogleAuthData(state, action) {
+            const { displayName, email, photo } = action.payload;
+            state.user.name = displayName;
+            state.user.email = email;
+            state.user.profileUrl = photo;
+        },
+
+          // setAuthenticateUser data :)
+          setAuthenticateUser(state, action) {
+            state.isAuthenticate= action.payload;
         },
 
     },
@@ -208,6 +232,7 @@ export const authSclice = createSlice({
             })
             .addCase(sendOtpMail.rejected, (state, action) => {
                 state.loading = "failed";
+                state.error = action.error;
             })
 
 
@@ -220,18 +245,22 @@ export const authSclice = createSlice({
             })
             .addCase(signUpUser.rejected, (state, action) => {
                 state.loading = "failed";
+                state.error = action.error;
             })
 
 
              // login user :)
              .addCase(loginUser.pending, (state, action) => {
                 state.loading = "pending";
+                state.isAuthenticate = false;
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.loading = "success";
+                state.isAuthenticate = true;
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.loading = "failed";
+                state.error = action.error;
             })
 
 
@@ -244,6 +273,7 @@ export const authSclice = createSlice({
             })
             .addCase(verifyForgotPasswordData.rejected, (state, action) => {
                 state.loading = "failed";
+                state.error = action.error;
             })
 
 
@@ -256,9 +286,10 @@ export const authSclice = createSlice({
             })
             .addCase(forgorPassword.rejected, (state, action) => {
                 state.loading = "failed";
+                state.error = action.error;
             })
     }
 })
 
-export const { setNewUserData, resetUserData, loginUserData, setUserOtp, setForgotPasswordEmailData ,setForgotPasswordData } = authSclice.actions;
+export const { setNewUserData, resetUserData, loginUserData, setUserOtp, setIsForgotEmail , setForgotPasswordEmailData ,setForgotPasswordData , setGoogleAuthData , setAuthenticateUser } = authSclice.actions;
 export default authSclice.reducer;

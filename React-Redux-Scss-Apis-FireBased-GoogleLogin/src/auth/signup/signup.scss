@@ -131,33 +131,6 @@
                         }
                     }
 
-                    .signInWithPart {
-                        @include flex-centers;
-                        padding: 5px 0;
-
-                        .vector {
-                            height: 2px;
-                            width: 100%;
-                            background-color: var(--theme-auth-vector-bg-light-gray);
-                        }
-
-                        .otherOption {
-                            width: 100%;
-                            padding: 2px;
-
-                            .signUpOption {
-                                color: var(--theme-auth-other-options-text);
-                                text-align: center;
-                                @include font-roboto-400;
-
-                                @include breakpoint ("max-md") {
-                                    font-size: 12px;
-                                    @include font-kanit-auth-subHeading-bold-400;
-                                    line-height: 23.92px;
-                                }
-                            }
-                        }
-                    }
                     .signUpSocialMediaPart
                     {
                         @include flex-centers;
@@ -182,14 +155,9 @@
                             {
                                 color: var( --theme-auth-account-options-link-moderate-text);
 
-                                @include breakpoint ("max-xs") {
+                                @include breakpoint ("max-xxss") {
                                     color: var(--theme-auth-account-options-link-white-text);
                                 }
-
-                                // @media screen and (min-width :931px) {
-                                //     color: var( --theme-auth-account-options-link-moderate-text);
-                                // }
-
                             }
                         }
                     }

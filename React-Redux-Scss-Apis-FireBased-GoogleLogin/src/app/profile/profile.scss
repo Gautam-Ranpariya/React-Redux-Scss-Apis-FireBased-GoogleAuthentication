@@ -1,0 +1,143 @@
+@import '../../styles/global.scss';
+
+.mainProfile {
+    background-color: var(--theme-profile-bg-lightgray);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+
+
+    .profileHeading {
+        @include font-kaisei-harunoUmi-bold-700;
+        text-align: center;
+        font-size: 22px;
+        padding: 15px;
+        box-shadow: 1px 7px 25px -6px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: 1px 7px 25px -6px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 1px 7px 25px -6px rgba(0, 0, 0, 0.75);
+        color: var(--theme-auth-account-options-black-text);
+
+        @include breakpoint("max-xs") {
+            font-size: 18px;
+        }
+
+        .authTextHeading {
+            color: var(--theme-auth-heading-text);
+        }
+    }
+
+    .container {
+        padding-top: 30px;
+
+        .innerProfile {
+            @include flex-col-centers;
+            gap: 10px;
+            padding: 20x 0;
+            max-width: 800px;
+            margin: 10px auto;
+            -webkit-box-shadow: 9px 9px 19px -1px rgba(0, 0, 0, 0.7);
+            -moz-box-shadow: 9px 9px 19px -1px rgba(0, 0, 0, 0.7);
+            box-shadow: 9px 9px 19px -1px rgba(0, 0, 0, 0.7);
+
+            @include breakpoint("max-lg") {
+                max-width: 600px;
+            }
+
+            @include breakpoint("max-sm") {
+                max-width: 400px;
+            }
+
+            @include breakpoint("max-xs") {
+                max-width: 300px;
+            }
+
+            @include breakpoint("max-xxs") {
+                max-width: 250px;
+            }
+
+            .profileMainContent {
+                border-bottom: 1px solid var(--theme-border-black);
+                width: 100%;
+
+
+                .profileSubHeading {
+                    @include font-karma-auth-heading-bold-700;
+                    font-size: 28px;
+                    color: var(--theme-auth-profile-lightDark-text);
+                    text-align: center;
+
+                    @include breakpoint("max-xs") {
+                        font-size: 24px;
+                    }
+                }
+            }
+
+            .profileImage {
+                height: 130px;
+                width: 130px;
+                border-radius: 50%;
+                cursor: pointer;
+
+                @include breakpoint("max-xxs") {
+                    height: 100px;
+                    width: 100px;
+                }
+
+                .profilePicture {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+
+            .userinformation {
+                width: 100%;
+                padding: 10px;
+                @include flex-col-centers;
+                gap: 15px;
+
+                .userInfo {
+                    @include flex-col-centers;
+                    align-items: flex-start;
+                    width: 100%;
+                    gap: 2px;
+
+                    .userInfoSubHeading {
+                        @include font-roboto-400;
+                        font-weight: bold;
+                        font-size: 14px;
+                        color: var(--theme-auth-profile-lightDark-text);
+                    }
+
+                    .userInfoDetail {
+                        padding: 10px;
+                        background-color: var(--theme-bg-white);
+                        width: 100%;
+                        border-radius: 10px;
+                    }
+                }
+            }
+
+            .saveProfile {
+                width: 100%;
+                padding: 10px;
+
+
+                .profileSaveButton {
+                    padding: 12px 0;
+                    font-size: 16px;
+                    background-color: var(--theme-auth-button-bg-moderate);
+                    outline: none;
+                    border: none;
+                    color: white;
+                    border-radius: 10px;
+                    width: 100%;
+                    display: block;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+}

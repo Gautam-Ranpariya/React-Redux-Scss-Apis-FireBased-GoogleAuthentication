@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import './resetPassword.scss';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { forgorPassword, setForgotPasswordData} from '../../redux/apiSclices/authSclice';
+import { forgorPassword, setForgotPasswordData, setIsForgotEmail} from '../../redux/apiSclices/authSclice';
 import AuthDesktop from '../../assets/images/authDesktop.png';
 import authResetPassword from '../../assets/images/auth-resetPassword.png';
 
@@ -56,8 +56,6 @@ export default function ResetPassword() {
     if ((forgotEmail === "") || (forgotEmail === 0) || (!email_pattern.test(forgotEmail))) {
       toast.error('Please enter a valid email');
       navigate('/forgotPassword');
-      // localStorage.removeItem('forgotPassEmail');
-      // localStorage.removeItem('forgotPassOtp');
       return;
     }
    
@@ -71,6 +69,7 @@ export default function ResetPassword() {
       .then((res) => {
         if (res.payload.msg === 'forget password successfully') {
           console.log('response : ############### ', res.payload)
+        dispatch(setIsForgotEmail(false));
           navigate('/login');
         }
       })
