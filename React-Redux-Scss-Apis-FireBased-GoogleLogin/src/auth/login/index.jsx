@@ -48,7 +48,6 @@ export default function Login() {
       })
     } catch (error) {
       console.log('Google login failed', error);
-      toast.error(error.message);
     }
   }
 
@@ -72,7 +71,6 @@ export default function Login() {
       })
     } catch (error) {
       console.log('Facebook login failed', error);
-      toast.error(error.message);
     }
   }
 
@@ -96,7 +94,6 @@ export default function Login() {
       })
     } catch (error) {
       console.log('GitHub login failed', error);
-      toast.error(error.message);
     }
   }
 
